@@ -3,7 +3,9 @@ import json
 import requests
 import re
 import os
+import csv
 from bs4 import BeautifulSoup
+from geopy.geocoders import Nominatim
 
 spotifyApiKey = ''
 geniusApiKey = ''
@@ -104,22 +106,52 @@ def getLyricsForStoredSongs():
                 index = lyrics.lower().index(fl[j].lower())
                 indexEnd = index + len(fl[j])
                 if lyrics[index][0].isupper():
-                    # found
                     ffound = open('found.txt',"a")
-                    ffound.write("\"" + songsList[i]["artist"] + "\";\"" + songsList[i]["title"] + "\";\"" + fl[j] + "\"\n") 
+                    ffound.write("" + songsList[i]["artist"].rstrip() + ";" + songsList[i]["title"].rstrip() + ";" + fl[j] + "\n") 
                     ffound.close()
-                    print("Trovato " + lyrics[index:indexEnd] + " in " + songsList[i]["title"] + " by " + songsList[i]["artist"])
+                    print("Trovato " + lyrics[index:indexEnd] + " in " + songsList[i]["title"].rstrip() + " by " + songsList[i]["artist"].rstrip())
             except ValueError:
                 index = -1
         
-    f = open("done.txt","a")
-    f.write(str(songsList[i]["id"]) + "\n")
+        
+        f = open("done.txt","a")
+        f.write(str(songsList[i]["id"]) + "\n")
+        f.close()
+    return
+
+
+def getCoordinates():
+
+    alreadyDone = []
+
+    geolocator = Nominatim(user_agent = "IndieMap by PaaaulZ")
+
+    csv.register_dialect('myDialect',delimiter = ';',skipinitialspace=True)
+
+    f = open('locations.txt','a')
+    with open('found.txt', 'r') as csvFile:
+        fl = csvFile.readlines()
+        for i in range(len(fl)):
+            flSplit = fl[i].split(";")
+            toSearch = flSplit[2].rstrip()
+            if toSearch not in alreadyDone:
+                print("--- SEARCHING COORDINATES FOR " + toSearch + " ---")
+                location = geolocator.geocode(toSearch)
+                if location is None:
+                    print(toSearch + " is none")
+                else:
+                    f.write(fl[i].rstrip() + ";" + str(location.latitude) + ";" + str(location.longitude) + "\n")
+                    alreadyDone.append(toSearch)
+
     f.close()
 
+    return
 
-#getArtistsFromSpotifyPlaylist()
+
+getArtistsFromSpotifyPlaylist()
 getSongsFromArtist_step1()
 getLyricsForStoredSongs()
+getCoordinates()
 
 
 
