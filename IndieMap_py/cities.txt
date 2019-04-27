@@ -1,4 +1,4 @@
-aachen
+﻿aachen
 aadorf taenikon
 aalborg
 aarhus
@@ -559,7 +559,6 @@ ancarano
 anchialos
 anchorage
 ancona
-anda
 andahualaylas
 andali
 andalo
@@ -617,7 +616,6 @@ anjalankoski anjala
 anju
 ankang
 ankara
-anna
 annaba
 annaberg im lammerta
 annecy
@@ -919,7 +917,7 @@ atessa
 athabasca agcm
 athalassa
 athens
-athens (usa)
+athens usa
 atherton treatment p
 atikokan
 atina
@@ -1606,7 +1604,7 @@ bergantino
 bergarud
 bergeggi
 bergen
-bergen (germania)
+bergen germania
 bergerac
 bergolo
 bergstadir
@@ -2539,7 +2537,6 @@ calcinate
 calcinato
 calcio
 calco
-calcutta
 caldaro sulla strada del vino
 caldarola
 caldera des. de. ata
@@ -3495,7 +3492,7 @@ catenanuova
 cathedral point
 catignano
 cato island
-cattaro (kotor)
+cattaro kotor
 cattolica
 cattolica eraclea
 caulonia
@@ -5160,7 +5157,7 @@ edi upper vineyard
 edievale
 edimburgo
 edinburgh
-edinburgh (aus)
+edinburgh aus
 edirne
 edithburgh aws
 edleb
@@ -5382,7 +5379,7 @@ este
 esterzili
 estevan a
 estevan point cs
-et irian jaya)
+et irian jaya
 etawah
 etheria
 etimesgut
@@ -9143,7 +9140,6 @@ luncheon hill forest
 lundazi
 lungavilla
 lungi
-lungo
 lungro
 lunz
 luodian
@@ -12005,7 +12001,6 @@ pantigliate
 pantnagar
 paola
 paolisi
-papa
 papasidero
 papeete
 paphos
@@ -14837,7 +14832,7 @@ santiago de las vega
 santiago del chile
 santiago del estero
 santo domingo
-santo stefano (herceg nov)
+santo stefano herceg nov
 santo stefano al mare
 santo stefano belbo
 santo stefano d'aveto
@@ -15956,7 +15951,6 @@ stefansson island
 stei
 steinkjer
 stekenjokk
-stella
 stella cilento
 stellanello
 stelvio
@@ -17012,7 +17006,7 @@ trino
 triora
 tripi
 tripoli
-tripoli (libano)
+tripoli libano
 tripolis
 trisobbio
 trissino
@@ -17235,7 +17229,6 @@ ulleungdo ab
 ulongue
 ulrichen
 ulsan
-ultimo
 ulu teljak
 uluberia
 ulul aws
@@ -18200,7 +18193,7 @@ welcome island
 welkom
 welland pelham
 wellington
-wellington (nz)
+wellington nz
 wels
 wenchi
 wendelstein
