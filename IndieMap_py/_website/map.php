@@ -3,7 +3,7 @@
 <html>
 <head>
 	
-	<title>Custom Icons Tutorial - Leaflet</title>
+	<title>IndieMap by PaaaulZ | https://github.com/IndieMap</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,15 +55,36 @@
 		orangeIcon = new LeafIcon({iconUrl: 'leaf-orange.png'});
 
 	<?php
-		$locationsText = file_get_contents('locations.txt');
-		$rows = explode("\n",$locationsText);
-		for ($i = 0;$i < count($rows)-1; $i++)
+
+		// GROUP SONGS WITH THE SAME LOCATION
+		
+		$jsonFileContent = file_get_contents('found4map.json');
+		$json = json_decode($jsonFileContent);
+
+		$locationArray = array();
+
+		foreach ($json as &$row)
 		{
-			$column = explode(";",$rows[$i]);
-			$column[0] = preg_replace('/[^A-Za-z0-9\-\s]/', '', $column[0]);
-			$column[1] = preg_replace('/[^A-Za-z0-9\-\s]/', '', $column[1]);
-			$column[2] = preg_replace('/[^A-Za-z0-9\-\s]/', '', $column[2]);
-			echo("L.marker([{$column[3]}, {$column[4]}]).bindPopup('{$column[0]} - {$column[1]} \[{$column[2]}\]').addTo(map);\n");
+			// Group songs by city
+			$cityTMP = $row[0]->city;
+
+			if (!in_array($cityTMP,array_keys($locationArray)))
+			{
+				$locationArray[$cityTMP] = array();
+			}
+			array_push($locationArray[$cityTMP],$row);
+		}
+
+		// TODO: Change the text shown and beautify code and map.
+		foreach ($locationArray as &$citySong)
+		{
+			$textTMP = "";
+			foreach ($citySong as &$song)
+			{
+				$textTMP = $song[0]->city;
+			}
+			$textTMP = preg_replace('/[^A-Za-z0-9\-\s]/', '', $textTMP);
+			echo("L.marker([{$song[0]->latitude}, {$song[0]->longitude}]).bindPopup('$textTMP').addTo(map);\n");
 		}
 	?>
 

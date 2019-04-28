@@ -17,6 +17,9 @@ def searchForNewArtists():
     # REQUIRES SPOTIFY API KEY 
     # Searches on the specified Spotify playlist for new artists
 
+    # Those artists are on spotify but not on Genius so it will find something wrong.
+    artistsToIgnore = ['Motta','Giancane','Chiazzetta','Kaufman']
+
     r = requests.get("https://api.spotify.com/v1/playlists/" + spotifyPlaylistID + "/tracks", headers={"Accept":"application/json","Content-Type":"application/json","Authorization":"Bearer " + spotifyApiKey})
     if r.status_code != 200:
         print("Unable to get tracks from playlist ",r.status_code)
@@ -25,11 +28,16 @@ def searchForNewArtists():
     for i in range(len(tracksJson["items"])):
         # Iterate through all the tracks in the playlist
         for j in range((len(tracksJson["items"][i]["track"]["artists"]))):
+
+            if tracksJson["items"][i]["track"]["artists"][j]["name"].rstrip().lower() in artistsToIgnore:
+                # HACK: Motta is not on genius, it will find something wrong.
+                next
+
             # Iterate through all the artists in the playlist
             exists = os.path.isfile('artists.txt')
             if exists:
                 # If file exists check if artist is new
-                if not tracksJson["items"][i]["track"]["artists"][j]["name"] in open('artists.txt').read():
+                if not tracksJson["items"][i]["track"]["artists"][j]["name"].rstrip().lower() in open('artists.txt').read().lower():
                     # If it's new add it to the list of valid artists.
                     f = open("artists.txt","a")
                     print("Found artist " + tracksJson["items"][i]["track"]["artists"][j]["name"].rstrip() + " [" + str(i+1) + "/" + str(len(tracksJson["items"])) + "]") 
@@ -148,7 +156,7 @@ def getLyricsForStoredSongs():
                         'title': songsList[i]["title"].rstrip(),
                         'city': cities[j].rstrip().capitalize(),
                         'lyricsUrl': lyricsUrl,
-                        'lyricLine': getCityLine(lyrics,"\n",cities[j]),
+                        'lyricsLine': getCityLine(lyrics,"\n",cities[j]),
                         'latitude': -1,
                         'longitude': -1
                     })
