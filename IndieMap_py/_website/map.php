@@ -81,7 +81,7 @@
 
 	<?php
 		
-		$jsonFileContent = file_get_contents('json/locations.json');
+		$jsonFileContent = file_get_contents('found4map.json');
 		$json = json_decode($jsonFileContent);
 
 		$locationArray = array();
