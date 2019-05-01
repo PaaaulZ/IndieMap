@@ -11,6 +11,7 @@ spotifyApiKey = ''
 geniusApiKey = ''
 spotifyPlaylistID = ''
 songsList = []
+artistsToIgnore = ['motta','giancane','chiazzetta','kaufman','management']
 
 def searchForNewArtists():
 
@@ -18,7 +19,6 @@ def searchForNewArtists():
     # Searches on the specified Spotify playlist for new artists
 
     # Those artists are on spotify but not on Genius so it will find something wrong.
-    artistsToIgnore = ['Motta','Giancane','Chiazzetta','Kaufman']
 
     r = requests.get("https://api.spotify.com/v1/playlists/" + spotifyPlaylistID + "/tracks", headers={"Accept":"application/json","Content-Type":"application/json","Authorization":"Bearer " + spotifyApiKey})
     if r.status_code != 200:
@@ -30,8 +30,8 @@ def searchForNewArtists():
         for j in range((len(tracksJson["items"][i]["track"]["artists"]))):
 
             if tracksJson["items"][i]["track"]["artists"][j]["name"].rstrip().lower() in artistsToIgnore:
-                # HACK: Motta is not on genius, it will find something wrong.
-                next
+                # HACK: Those artists are not on genius, it will find something wrong. NOTE: Use lowercase so we don't have to mess around with case-sensitive
+                continue
 
             # Iterate through all the artists in the playlist
             exists = os.path.isfile('artists.txt')
@@ -64,7 +64,11 @@ def fetchArtistID(artist):
         exit()
     for i in range(len(searchJson["response"]["hits"])):
         # HACK: The for loop is not necessary, might fix later.
-        return searchJson["response"]["hits"][i]["result"]["primary_artist"]["id"]
+        if searchJson["response"]["hits"][i]["result"]["primary_artist"]["name"].lower().rstrip() == artist.lower():
+            return searchJson["response"]["hits"][i]["result"]["primary_artist"]["id"]
+        else:
+            print(searchJson["response"]["hits"][i]["result"]["primary_artist"]["name"] + " does not match exactly with " + artist + ". Add it to artistsToIgnore and remove it from artists.txt or fix the name in the code.")
+            return -1
 
 
 def fetchSongs(artistID,artist,pageNumber):
@@ -97,6 +101,8 @@ def startFetchingSongs():
         for i in range(len(artists)):
             artist = artists[i].rstrip()
             artistID = fetchArtistID(artist)
+            if artistID == -1:
+                continue
             # DEBUG
             print("--- FETCHING SONGS FOR " + artist + " ---")
             fetchSongs(artistID,artist,1)
@@ -118,7 +124,12 @@ def getLyricsForStoredSongs():
         if exists:
             if str(songsList[i]["id"]) in open('done.txt').read():
                     # If I already analyzed this song just skip it.
-                    next
+                    #print(songsList[i]["title"] + " already done!")
+                    continue
+
+        if songsList[i]["artist"].lower().rstrip() in artistsToIgnore:
+            #print(songsList[i]["artist"] + " is in artistsToIgnore skipped!")
+            continue
 
         # DEBUG
         print("Searching for cities in " + songsList[i]["title"] + " [" + str(i+1) + "/" + str(len(songsList)) + "]")
@@ -139,8 +150,13 @@ def getLyricsForStoredSongs():
 
         fCity = open("cities.txt","r")
         cities = fCity.readlines()
-        ffound = open('found.json',"a")
 
+        if os.path.isfile('found.json'):
+            with open('found.json') as fOldJson:
+                oldJson = json.load(fOldJson)
+                foundObj = oldJson
+                count = len(oldJson)+1
+                               
         for j in range(len(cities)):
             try:
                 # I don't want to bother with case-sensitive so I just lowercase everything.
@@ -164,13 +180,16 @@ def getLyricsForStoredSongs():
                     print("FOUND " + lyrics[index:indexEnd].rstrip() + " in " + songsList[i]["title"].rstrip() + " by " + songsList[i]["artist"].rstrip())
             except ValueError:
                 index = -1
-        
+                
         f = open("done.txt","a")
         f.write(str(songsList[i]["id"]) + "\n")
         f.close()
         lyrics = ""
+
+    ffound = open('found.json',"w")
     json.dump(foundObj, ffound)
     ffound.close()
+    
     return
 
 
@@ -181,19 +200,22 @@ def getCoordinates():
 
     geolocator = Nominatim(user_agent = "IndieMap by PaaaulZ")
     f = open('found.json', 'r')
-    f4m = open('found4map.json','a')
+    f4m = open('found4map.json','w')
     foundCities = json.load(f)
 
-    for i in range(len(foundCities)):
+    # HACK: I manually deleted some songs from found.json and found4map.json because of some false matches so i messed up the indexses. 
+    # By doing this I don't care about the indexes, I can read by always using foreach just as in map.php. Not cool but works pretty well for now.
+
+    for fakeIndex in f:
         # HACK: I have to fix this horrible JSON writer/reader. It's 2AM have mercy
-        toSearch = foundCities[str(i)][0]['city']
+        toSearch = foundCities[str(fakeIndex)][0]['city']
         location = geolocator.geocode(toSearch)
         if location is None:
-            print("NOT FOUND coordinates for " + toSearch + " [" + str(i+1) + "/" + str(len(foundCities)) + "]")
+            print("NOT FOUND coordinates for " + toSearch)
         else:
-            foundCities[str(i)][0]['latitude'] = location.latitude
-            foundCities[str(i)][0]['longitude'] = location.longitude
-            print("Found coordinates for " + toSearch + " [" + str(i+1) + "/" + str(len(foundCities)) + "]")
+            foundCities[str(fakeIndex)][0]['latitude'] = location.latitude
+            foundCities[str(fakeIndex)][0]['longitude'] = location.longitude
+            print("Found coordinates for " + toSearch)
 
     json.dump(foundCities,f4m)
     f.close()
@@ -231,20 +253,6 @@ def getCityLine(string, first, last):
         start = rowBefore
         end = rowAfter
 
-        # Your start index will be the \n before the last one \I found earlier.
-        # Your end index will be the last one
-
-        #if len(lfFound) >= 2:
-        #    #start = lfFound[len(lfFound)-2] + len(first)
-        #    #end = lfFound[len(lfFound)-1] + len(last)
-        #    start = lfFound[len(lfFound)-2]
-        #    end = string.index(last, start) + len(last)
-        #else:
-        #    start = 0
-        #    end = string.index(last, start) + len(last)
-
-        #start = lfFound[len(lfFound)-1] + len(first)
-        #end = string.index(last, start) + len(last)
         outString = re.sub('[^a-zA-Z0-9 \n\.\'èéòòìàù]', '', string[start:end])
     except ValueError:
         outString = ""
