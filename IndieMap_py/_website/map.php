@@ -113,7 +113,7 @@
 				$textTMP .= "<a href = '{$song[0]->lyricsUrl}'>{$song[0]->artist} - {$song[0]->title}<br/></a>";
 			}
 			// Remove special chars in the popup or the map goes boom.
-			$textTMP = preg_replace('/[^A-Za-z0-9\-\s<br\/>\;\"\:\=\.]/', '', $textTMP);
+			$textTMP = preg_replace('/[^A-Za-z0-9\-\s<br\/>\;\"\:\=\.àèéùì]/', '', $textTMP);
 
 			switch (true) 
 			{

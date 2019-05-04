@@ -346,4 +346,6 @@ IndieMap_py/_txtbak
 IndieMap_py/IndieMap_py.pyproj
 IndieMap_py/found.json
 IndieMap_py/found4map.json
+IndieMap_py/found4map.csv
+IndieMap_py/found4map.xlsx
 IndieMap_py.sln
