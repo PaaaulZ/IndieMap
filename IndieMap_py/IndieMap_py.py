@@ -11,7 +11,7 @@ spotifyApiKey = ''
 geniusApiKey = ''
 spotifyPlaylistID = ''
 songsList = []
-artistsToIgnore = ['motta','giancane','chiazzetta','kaufman','management']
+artistsToIgnore = ['chiazzetta','kaufman','management','rovere']
 
 def searchForNewArtists():
 
@@ -58,6 +58,11 @@ def fetchArtistID(artist):
     # HACK: Ugly code to fix this artist, Spotify calls it Carl Brave x Franco 126 but genius calls it Carl Brave x Franco126
     if artist == "Carl Brave x Franco 126":
         artist = "Carl Brave x Franco126"
+    elif artist == 'Ketra':
+        artist = "Takagi & Ketra"
+    elif artist == "Coma_Cose":
+        artist = 'Coma Cose'
+
     searchJson = json.loads(r.text)
     if searchJson["meta"]["status"] != 200:
         print("Unable to fetch artist id")
@@ -67,8 +72,7 @@ def fetchArtistID(artist):
         if searchJson["response"]["hits"][i]["result"]["primary_artist"]["name"].lower().rstrip() == artist.lower():
             return searchJson["response"]["hits"][i]["result"]["primary_artist"]["id"]
         else:
-            print(searchJson["response"]["hits"][i]["result"]["primary_artist"]["name"] + " does not match exactly with " + artist + ". Add it to artistsToIgnore and remove it from artists.txt or fix the name in the code.")
-            return -1
+            print(searchJson["response"]["hits"][i]["result"]["primary_artist"]["name"] + " does not match exactly with " + artist + ". I'll continue.")
 
 
 def fetchSongs(artistID,artist,pageNumber):
@@ -76,6 +80,10 @@ def fetchSongs(artistID,artist,pageNumber):
     # Iterates through every artist and starts downloading songs
 
     # TODO: Just for the first time stores the songs list in memory. Might be worth to switch to a file/DB?
+
+    if artistID is None:
+        print("artistID is None for " + artist)
+        return
     
     r = requests.get("https://api.genius.com/artists/" + str(artistID) + "/songs/?page=" + str(pageNumber), headers={"Accept":"application/json","Content-Type":"application/json","Authorization":"Bearer " + geniusApiKey})
     if r.status_code != 200:
@@ -86,7 +94,7 @@ def fetchSongs(artistID,artist,pageNumber):
 
         # DEBUG
         print("Found song " + songsJson["response"]["songs"][i]["title"] + " [" + str(i+1) + "/" + str(len(songsJson["response"]["songs"])) + "] page " + str(pageNumber))
-        songsList.append({"id":songsJson["response"]["songs"][i]["id"],"title":songsJson["response"]["songs"][i]["title"],"artist":artist})
+        songsList.append({"id":songsJson["response"]["songs"][i]["id"],"title":songsJson["response"]["songs"][i]["title"],"artist":songsJson["response"]["songs"][i]["primary_artist"]["name"]})
 
     if songsJson["response"]["next_page"] is not None:
         # If after that for loop you find another page go for it.
@@ -206,7 +214,7 @@ def getCoordinates():
     # HACK: I manually deleted some songs from found.json and found4map.json because of some false matches so i messed up the indexses. 
     # By doing this I don't care about the indexes, I can read by always using foreach just as in map.php. Not cool but works pretty well for now.
 
-    for fakeIndex in f:
+    for fakeIndex in foundCities:
         # HACK: I have to fix this horrible JSON writer/reader. It's 2AM have mercy
         toSearch = foundCities[str(fakeIndex)][0]['city']
         location = geolocator.geocode(toSearch)

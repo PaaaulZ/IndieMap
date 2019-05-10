@@ -3031,7 +3031,6 @@ carr����
 carr����
 carrega ligure
 carrizal
-carro
 carrodano
 carrosio
 carsamba
@@ -3617,7 +3616,6 @@ cerea
 ceregnano
 cerenzia
 cerepovec
-ceres
 ceresara
 cereseto
 ceresole alba
@@ -14180,7 +14178,6 @@ san bartolomeo al mare
 san bartolomeo in galdo
 san bartolomeo val cavargna
 san basile
-san basilio
 san bassano
 san bellino
 san benedetto belbo
@@ -18384,7 +18381,6 @@ yongan
 yongshujiao
 yorkton
 yoro
-young
 youngstown
 youyang
 yozgat
@@ -18648,7 +18644,6 @@ giamaica
 giappone
 gibuti 
 giordania 
-grecia
 grenada
 guatemala 
 guinea 
