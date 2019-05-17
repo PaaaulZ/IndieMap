@@ -158,12 +158,6 @@ def getLyricsForStoredSongs():
 
         fCity = open("cities.txt","r")
         cities = fCity.readlines()
-
-        if os.path.isfile('found.json'):
-            with open('found.json') as fOldJson:
-                oldJson = json.load(fOldJson)
-                foundObj = oldJson
-                count = len(oldJson)+1
                                
         for j in range(len(cities)):
             try:
@@ -208,7 +202,7 @@ def getCoordinates():
 
     geolocator = Nominatim(user_agent = "IndieMap by PaaaulZ")
     f = open('found.json', 'r')
-    f4m = open('found4map.json','w')
+    f4m = open('found4map.json','a')
     foundCities = json.load(f)
 
     # HACK: I manually deleted some songs from found.json and found4map.json because of some false matches so i messed up the indexses. 
@@ -266,6 +260,41 @@ def getCityLine(string, first, last):
         outString = ""
     return outString.capitalize()
 
+def fixIndexes():
+
+    # WARNING: THIS PROCEDURE IS A FIX FOR THE BAD INDEXES IN FOUND4MAP.JSON DUE TO ME MANUALLY REMOVING SONGS.
+    # PLEASE BACKUP FOUND4MAP.JSON BEFORE RUNNING THIS PROCEDURE
+
+    if not os.path.exists('found4map.json'):
+        return
+
+    f = open('found4map.json','r')
+    f2 = open('found4map_fixed.json','a')
+    count = 0
+    for row in f:
+
+        try:
+            artistIndex = row.index(': [{')-1
+        except:
+            f2.write(row)
+            continue
+
+        indexSlice = row[1:artistIndex].replace('"','').rstrip()
+
+        row = row.replace('"' + str(indexSlice) + '": [{','"' + str(count) + '": [{')
+
+        f2.write(row)
+        count += 1
+
+    f.close()
+    f2.close()
+
+    os.remove('found4map.json')
+    os.rename('found4map_fixed.json','found4map.json')
+    
+    return
+
+    
 # Load configuration file with various API keys
 try:
     with open('config.json', 'r') as f:
@@ -281,7 +310,7 @@ searchForNewArtists()
 startFetchingSongs()
 getLyricsForStoredSongs()
 getCoordinates()
-
+fixIndexes()
 
 
 

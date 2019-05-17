@@ -370,7 +370,6 @@ aleppo meselme
 alert
 alert climate
 alert ua
-ales
 alessandria
 alessandria del carretto
 alessandria della rocca
@@ -619,7 +618,6 @@ annette island
 annicco
 annone di brianza
 annone veneto
-anoia
 anqing
 ansbach
 anso
@@ -781,7 +779,6 @@ arnasco
 arnesano
 arnos vale
 arogyavaram
-arola
 aroma
 arona
 arorae
@@ -958,7 +955,6 @@ austis
 auxerre
 avalon
 avangard zernosovhoz
-avare
 avegno
 avelengo
 avella
@@ -2760,7 +2756,6 @@ canosa di puglia
 canosa sannita
 canosio
 canossa
-cansano
 cantagallo
 cantalice
 cantalupa
@@ -2981,7 +2976,6 @@ carisolo
 carlantino
 carlazzo
 carlentini
-carlino
 carlisle
 carloforte
 carlopoli
@@ -3707,7 +3701,6 @@ cetraro
 ceuta
 ceva
 cevio
-cevo
 chachapoyas
 chachoengsao
 chagyl
@@ -4290,7 +4283,6 @@ concordia sagittaria
 concordia sulla secchia
 concorezzo
 condega
-condino
 condobolin ag resear
 condobolin aws
 condofuri
@@ -5004,7 +4996,6 @@ doulan
 dourados
 dourbes
 dovadola
-dover
 dovera
 dozza
 drag ajluokta
@@ -5233,7 +5224,6 @@ elliot lake a
 elliott
 ellisras
 elliston
-ello
 elmas
 elora rcs
 eloten
@@ -5350,7 +5340,6 @@ essaouira
 essen bredeney
 essendon
 estcourt
-este
 esterzili
 estevan a
 estevan point cs
@@ -5789,7 +5778,6 @@ fort-de-france
 fortaleza
 forte dei marmi
 fortezza
-fortuna
 fortunago
 forza d'agr����
 fosciandora
@@ -6454,7 +6442,6 @@ grajau
 gral. bruguez
 grammichele
 gran piedra
-grana
 granada
 granaglione
 granarolo dell'emilia
@@ -7044,7 +7031,6 @@ houche al oumara
 houei sai
 houghton
 houghton lake
-houston
 houtribdijk
 hovd
 hovden lundane
@@ -8696,7 +8682,6 @@ leninskoe
 lenna
 lenno
 lennoxville
-leno
 lenola
 lensk
 lentate sul seveso
@@ -9182,7 +9167,6 @@ macchia valfortore
 macchiagodena
 macdill afb
 maceio
-macello
 macenta
 macerata
 macerata campania
@@ -9389,7 +9373,6 @@ malvito
 malwy
 malye derbety
 malye karmakuly
-mama
 mamakan
 mambasa
 mamfe
@@ -9434,7 +9417,6 @@ mangalore aws compos
 mangilsan
 mangla
 mangnai
-mango
 mango farm
 mangochi
 mangodara
@@ -9525,7 +9507,6 @@ maresale
 maretto
 marfa
 margaret lake
-margarita
 margate
 margherita di savoia
 margno
@@ -9869,7 +9850,6 @@ menindee
 meningie
 menongue
 menorca
-mentana
 menzelinsk
 meolo
 meppen
@@ -10995,7 +10975,6 @@ nausori
 nautabu
 nautanwa
 navacerrada
-nave
 nave san rocco
 navelli
 naven
@@ -11745,7 +11724,6 @@ ottawa
 ottawa macdonald car
 ottiglio
 ottobiano
-ottone
 ottosdal
 ouagadougou
 ouahigouya
@@ -11827,7 +11805,6 @@ paduli
 padun
 paeroa aws
 paesana
-paese
 pagan island aws
 pagani
 paganico sabino
@@ -12197,7 +12174,6 @@ perloz
 perm
 pernaja orrengrund
 pernumia
-pero
 perosa argentina
 perosa canavese
 perpignan
@@ -12478,7 +12454,6 @@ piombino
 piombino dese
 pioraco
 piossasco
-piotta
 piov���� massaia
 piove di sacco
 piovene rocchette
@@ -12871,7 +12846,6 @@ poso
 posoltega
 possagno
 posse
-posta
 posta fibreno
 postal
 postalesio
@@ -13033,7 +13007,6 @@ prince george ua
 prince rupert awos
 princeton cs
 princeville
-principe
 prins christian sund
 priocca
 priola
@@ -13575,7 +13548,6 @@ rivas
 rive
 rive d'arcano
 rivello
-rivera
 rivercourse agcm
 rivergaro
 riversdale
@@ -13998,7 +13970,6 @@ sabiha gokcen
 sabirabad
 sable island
 sabu
-sacco
 saccolongo
 sacheon ab
 sachkhere
@@ -14060,7 +14031,6 @@ sakata
 sakon nakhon
 sakon nakhon agromet
 sakunja
-sala
 sala baganza
 sala biellese
 sala bolognese
@@ -14958,7 +14928,6 @@ scandolara ripa d'oglio
 scandriglia
 scanno
 scano di montiferro
-scansano
 scanzano jonico
 scanzorosciate
 scapoli
@@ -14979,7 +14948,6 @@ schiavi di abruzzo
 schiavon
 schignano
 schilpario
-schio
 schivenoglia
 schleiz
 schleswig
@@ -15440,7 +15408,6 @@ singida
 singkep
 singleton stp
 singye
-sini
 sinio
 siniscola
 sinjar
@@ -15649,7 +15616,6 @@ sordevolo
 sordio
 soresina
 sorg����
-sorgono
 sori
 soria
 sorianello
@@ -15935,7 +15901,6 @@ stornarella
 stornoway
 storo
 storon
-stra
 stradella
 strambinello
 strambino
@@ -17116,7 +17081,6 @@ udu point
 uebelbach
 ueckermuende
 uega
-ueno
 uetliberg
 ufa dioma
 ufs deutsche bucht.
@@ -17210,7 +17174,6 @@ urgoon
 uritsky
 urjupino
 urjupinsk
-urmi
 urtsadzor
 urubupunga
 urucui
@@ -17271,7 +17234,6 @@ utsunomiya
 utsunomiya ab
 uttaradit
 uttarkashi
-utti
 uummannaq heliport
 uvol
 uwajima
@@ -17512,7 +17474,6 @@ vega vallsjo
 veggiano
 veggli ii
 veglie
-veglio
 vegreville
 veguitas
 veidivatnahraun
@@ -17895,7 +17856,6 @@ vinnicy
 vinnytsia
 vinovo
 vinzaglio
-viola
 violet grove cs
 vione
 vioolsdrif
@@ -17948,7 +17908,6 @@ vjatskie poljany
 vjazemskaja
 vjazma
 vladikavkaz
-vladimir
 vladivostok
 vlakte van raan
 vlieland
@@ -18441,7 +18400,6 @@ zanzibar
 zaoyang
 zaporizhzhia
 zapponeta
-zara
 zaragoza
 zaranj
 zardab
