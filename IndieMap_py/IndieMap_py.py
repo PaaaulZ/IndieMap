@@ -69,7 +69,7 @@ def fetchArtistID(artist):
         exit()
     for i in range(len(searchJson["response"]["hits"])):
         # HACK: The for loop is not necessary, might fix later.
-        if searchJson["response"]["hits"][i]["result"]["primary_artist"]["name"].lower().rstrip() == artist.lower():
+        if searchJson["response"]["hits"][i]["result"]["primary_artist"]["name"].lower().rstrip() == artist.lower().rstrip():
             return searchJson["response"]["hits"][i]["result"]["primary_artist"]["id"]
         else:
             print(searchJson["response"]["hits"][i]["result"]["primary_artist"]["name"] + " does not match exactly with " + artist + ". I'll continue.")
@@ -125,6 +125,7 @@ def getLyricsForStoredSongs():
 
     foundObj = {}
     count = 0
+    fakeIndexToUse = lastFakeIndex()
 
     for i in range(len(songsList)):
 
@@ -168,8 +169,8 @@ def getLyricsForStoredSongs():
                 if lyrics[index][0].isupper() and lyrics[index:indexEnd].lower().rstrip() == cities[j].lower().rstrip():
                     # To prevent getting trash (not real cities) i check if the first letter is uppercase. Most of the times this works.
                     # And i check if the name matches EXACTLY
-                    foundObj[count] = []  
-                    foundObj[count].append({  
+                    foundObj[fakeIndexToUse] = []
+                    foundObj[fakeIndexToUse].append({
                         'artist': songsList[i]["artist"].rstrip(),
                         'title': songsList[i]["title"].rstrip(),
                         'city': cities[j].rstrip().capitalize(),
@@ -179,6 +180,7 @@ def getLyricsForStoredSongs():
                         'longitude': -1
                     })
                     count += 1
+                    fakeIndexToUse += 1
                     print("FOUND " + lyrics[index:indexEnd].rstrip() + " in " + songsList[i]["title"].rstrip() + " by " + songsList[i]["artist"].rstrip())
             except ValueError:
                 index = -1
@@ -189,7 +191,7 @@ def getLyricsForStoredSongs():
         lyrics = ""
 
     ffound = open('found.json',"w")
-    json.dump(foundObj, ffound)
+    json.dump(foundObj, ffound,sort_keys=True, indent=4)
     ffound.close()
     
     return
@@ -202,7 +204,6 @@ def getCoordinates():
 
     geolocator = Nominatim(user_agent = "IndieMap by PaaaulZ")
     f = open('found.json', 'r')
-    f4m = open('found4map.json','a')
     foundCities = json.load(f)
 
     # HACK: I manually deleted some songs from found.json and found4map.json because of some false matches so i messed up the indexses. 
@@ -213,17 +214,41 @@ def getCoordinates():
         toSearch = foundCities[str(fakeIndex)][0]['city']
         location = geolocator.geocode(toSearch)
         if location is None:
-            print("NOT FOUND coordinates for " + toSearch)
+            print("CAN'T FIND coordinates for " + toSearch)
         else:
             foundCities[str(fakeIndex)][0]['latitude'] = location.latitude
             foundCities[str(fakeIndex)][0]['longitude'] = location.longitude
-            print("Found coordinates for " + toSearch)
+            print("Found coordinates for " + toSearch)        
 
-    json.dump(foundCities,f4m)
+    with open('found4map.json','r') as f4m:
+        found4mapNew = json.load(f4m)
+        for fakeIndex in foundCities:
+            found4mapNew[fakeIndex] = []
+            found4mapNew[fakeIndex].append({
+                'artist': foundCities[str(fakeIndex)][0]['artist'],
+                'title': foundCities[str(fakeIndex)][0]['title'],
+                'city': foundCities[str(fakeIndex)][0]['city'],
+                'lyricsUrl': foundCities[str(fakeIndex)][0]['lyricsUrl'],
+                'lyricsLine': foundCities[str(fakeIndex)][0]['lyricsLine'],
+                'latitude': foundCities[str(fakeIndex)][0]['latitude'],
+                'longitude': foundCities[str(fakeIndex)][0]['longitude']
+            })
+    f4m = open('found4map.json','w')
+    json.dump(found4mapNew,f4m, sort_keys=True, indent=4)
+   
     f.close()
-    f4m.close()
 
     return
+
+def lastFakeIndex():
+
+    higher = 0
+    with open('found4map.json','r') as f:
+        fJson = json.load(f)
+        for fakeIndex in fJson:
+            if int(fakeIndex) > int(higher):
+                higher = int(fakeIndex)
+    return higher
 
 def getCityLine(string, first, last):
     # TODO: Fix this function
@@ -260,39 +285,60 @@ def getCityLine(string, first, last):
         outString = ""
     return outString.capitalize()
 
-def fixIndexes():
+#def fixIndexes():
 
-    # WARNING: THIS PROCEDURE IS A FIX FOR THE BAD INDEXES IN FOUND4MAP.JSON DUE TO ME MANUALLY REMOVING SONGS.
-    # PLEASE BACKUP FOUND4MAP.JSON BEFORE RUNNING THIS PROCEDURE
+#    # WARNING: THIS PROCEDURE IS A FIX FOR THE BAD INDEXES IN FOUND4MAP.JSON DUE TO ME MANUALLY REMOVING SONGS.
+#    # PLEASE BACKUP FOUND4MAP.JSON BEFORE RUNNING THIS PROCEDURE
 
-    if not os.path.exists('found4map.json'):
-        return
+#    if not os.path.exists('found4map.json'):
+#        return
 
-    f = open('found4map.json','r')
-    f2 = open('found4map_fixed.json','a')
-    count = 0
-    for row in f:
+#    f = open('found4map.json','r')
+#    f2 = open('found4map_fixed.json','a')
+#    count = 0
+#    for row in f:
 
-        try:
-            artistIndex = row.index(': [{')-1
-        except:
-            f2.write(row)
-            continue
+#        try:
+#            artistIndex = row.index(': [{')-1
+#        except:
+#            f2.write(row)
+#            continue
 
-        indexSlice = row[1:artistIndex].replace('"','').rstrip()
+#        indexSlice = row[1:artistIndex].replace('"','').rstrip()
 
-        row = row.replace('"' + str(indexSlice) + '": [{','"' + str(count) + '": [{')
+#        row = row.replace('"' + str(indexSlice) + '": [{','"' + str(count) + '": [{')
 
-        f2.write(row)
-        count += 1
+#        f2.write(row)
+#        count += 1
 
-    f.close()
-    f2.close()
+#    f.close()
+#    f2.close()
 
-    os.remove('found4map.json')
-    os.rename('found4map_fixed.json','found4map.json')
+#    os.remove('found4map.json')
+#    os.rename('found4map_fixed.json','found4map.json')
     
-    return
+#    return
+
+def test_reorder():
+    with open('found4map.json','r') as f4m:
+        foundCities = json.load(f4m)
+        lastIndex = lastFakeIndex()
+        found4mapNew = {}
+        for fakeIndex in range(0,lastIndex):
+            found4mapNew[fakeIndex] = []
+            found4mapNew[fakeIndex].append({
+                'artist': foundCities[str(fakeIndex)][0]['artist'],
+                'title': foundCities[str(fakeIndex)][0]['title'],
+                'city': foundCities[str(fakeIndex)][0]['city'],
+                'lyricsUrl': foundCities[str(fakeIndex)][0]['lyricsUrl'],
+                'lyricsLine': foundCities[str(fakeIndex)][0]['lyricsLine'],
+                'latitude': foundCities[str(fakeIndex)][0]['latitude'],
+                'longitude': foundCities[str(fakeIndex)][0]['longitude']
+            })
+
+    with open('found4map.json','w') as f4m:
+        json.dump(found4mapNew,f4m, sort_keys=True, indent=4)
+
 
     
 # Load configuration file with various API keys
@@ -310,9 +356,9 @@ searchForNewArtists()
 startFetchingSongs()
 getLyricsForStoredSongs()
 getCoordinates()
-fixIndexes()
+test_reorder()
 
-
+#fixIndexes()
 
 
 
