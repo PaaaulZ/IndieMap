@@ -339,13 +339,7 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 IndieMap_py/config.json
-IndieMap_py/found.txt
-IndieMap_py/done.txt
-IndieMap_py/artists.txt
-IndieMap_py/_txtbak
 IndieMap_py/IndieMap_py.pyproj
-IndieMap_py/found.json
-IndieMap_py/found4map.json
-IndieMap_py/found4map.csv
-IndieMap_py/found4map.xlsx
+IndieMap_py/indiemap.Log
+IndieMap_py/_website/config.php
 IndieMap_py.sln
