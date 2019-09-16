@@ -1,6 +1,10 @@
 # IndieMap
 A Python script that finds cities in lyrics of songs by Italian Indie Artists and a PHP page to show everything on a map
 
+---
+
+Want to see it work? Check my [LIVE VERSION](http://paaaulz.altervista.org)
+
 ## DISCLAIMER
 
 This is my first Python project and I'm a bit rusty in PHP so I wrote everything with the knowledge I have at this time. Don't expect something complicated, it's just a simple project for a simple concept. I will update the code and make it better as I learn so I'm kinda using this code to show my future self how much I learned and improved.
