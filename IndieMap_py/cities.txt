@@ -2575,7 +2575,6 @@ camarena de la sierr
 camastra
 camaxilo
 cambiago
-cambiano
 cambiasca
 camborne
 cambrai epinoy
@@ -5728,7 +5727,6 @@ forno canavese
 forno di zoldo
 fornovo di taro
 fornovo san giovanni
-forrest
 forster beach carava
 fort assiniboine agc
 fort beaufort
@@ -9463,7 +9461,6 @@ maple creek
 maputo
 maquela do zombo
 maquinchao
-mara
 maraba
 maracaibo la chinita
 maracalagonis
@@ -13345,7 +13342,6 @@ reboly
 rebriha
 recale
 recanati
-recco
 recetto
 recife
 recoaro terme
@@ -14979,7 +14975,6 @@ sclafani bagni
 scone
 scone scs
 scontrone
-scopa
 scopello
 scoppito
 scordia
@@ -15889,7 +15884,6 @@ stoccolma
 stockholm
 stockholm arlanda
 stockholm est
-stockton
 stoelmanseiland
 stoetten
 stojba

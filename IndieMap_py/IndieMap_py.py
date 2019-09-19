@@ -23,9 +23,35 @@ dbase = ''
 bypass_arg = ''
 log_level = ''
 songs_list = []
+no_featuring = False
 mydb = None
+log = ""
 
-artists_to_ignore = ['chiazzetta','kaufman','management','rovere','nuvola','esposito','meli','the jab'] # Those artists are on Spotify but not on Genius so it will find something wrong.
+# Those artists are on Spotify but not on Genius so it will find something wrong.
+artists_to_ignore = [
+    'chiazzetta',
+    'kaufman',
+    'management',
+    'rovere',
+    'nuvola',
+    'esposito',
+    'meli',
+    'the jab',
+    'J Ax',
+    'Francesca Michielin',
+    'Fedez',
+    'Achille lauro',
+    'MadMan',
+    'Fabri Fibra',
+    'Noyz Narcos',
+    'Gemitaiz',
+    'En?gma',
+    'Salmo',
+    'Clementino',
+    'alex britti',
+    'Gemello',
+    'Dark polo gang',
+    'moca'] 
 
 # --- END GLOBALS ---
 
@@ -39,11 +65,11 @@ def search_for_new_artists():
 
     r = requests.get(f"https://api.spotify.com/v1/playlists/{spotify_playlist_id}/tracks", headers={"Accept":"application/json","Content-Type":"application/json","Authorization":"Bearer " + spotify_api_key})
     if r.status_code == 401:
-        logging.critical("[Spotify] [searchForNewArtists] Access denied. Wrong/expired API key?")
+        log.critical("[Spotify] [searchForNewArtists] Access denied. Wrong/expired API key?")
         exit()
 
     if r.status_code != 200:
-        logging.critical(f"[Spotify] [searchForNewArtists] Unable to get tracks from playlist {r.status_code}")
+        log.critical(f"[Spotify] [searchForNewArtists] Unable to get tracks from playlist {r.status_code}")
         exit()
 
     tracks_json = json.loads(r.text)
@@ -57,18 +83,18 @@ def search_for_new_artists():
             artist_name_tmp = artists_tmp[j]["name"].rstrip().lower()
 
             if artist_name_tmp in artists_to_ignore:
-                # HACK: Those artists are not on genius, it will find something wrong. NOTE: Using lowercase so we don't have to mess around with case-sensitive
+                # HACK: Those artists are not on genius, it will find something wrong (ore they are not indie). NOTE: Using lowercase so we don't have to mess around with case-sensitive
                 continue
 
             # Iterate through all the artists in the playlist
             
             if not artist_name_tmp in artists_list:
                 # If it's new add it to the list of valid artists.
-                logging.info("[Spotify] [searchForNewArtists] Found artist " + artist_name_tmp) 
+                log.info("[Spotify] [searchForNewArtists] Found artist " + artist_name_tmp) 
                 artist_id_tmp = fetch_artist_id(artist_name_tmp,"GENIUS")
 
                 if artist_id_tmp is None:
-                    logging.error(f"[Spotify] [searchForNewArtists]Skipped {artist_name_tmp} because I can't find the id on Genius. If you find it add it manually to the database")
+                    log.error(f"[Spotify] [searchForNewArtists] Skipped {artist_name_tmp} because I can't find the id on Genius. If you find it add it manually to the database")
                 else:
                     artists_list.append(artist_name_tmp)
 
@@ -78,6 +104,11 @@ def search_for_new_artists():
 
                     insert_cursor.execute(sql,val)
 
+                    # no_featuring = True means that IndieMap will only get the primary artist.
+                    if no_featuring:
+                        break
+
+                    
         mydb.commit()
 
     return artists_list
@@ -90,16 +121,16 @@ def fetch_artist_id(name,where):
     # TODO: Genius.com returns only 5 results when you search so i'll never find franco126. Need to find a better way
 
     if name == "carl brave x franco 126":
-        logging.debug(f"[Genius] [fetchartist_id] switched {name} with hardcoded name")
+        log.debug(f"[Genius] [fetchartist_id] switched {name} with hardcoded name")
         name = "carl Brave x franco126"
     elif name == 'ketra':
-        logging.debug(f"[Genius] [fetchartist_id] switched {name} with hardcoded name")
+        log.debug(f"[Genius] [fetchartist_id] switched {name} with hardcoded name")
         name = "takagi & ketra"
     elif name == "coma_cose":
-        logging.debug(f"[Genius] [fetchartist_id] switched {name} with hardcoded name")
+        log.debug(f"[Genius] [fetchartist_id] switched {name} with hardcoded name")
         name = 'coma cose'
     elif name == 'franco126':
-        logging.debug(f"[Genius] [fetchartist_id] returned hardcoded ID for {name}")
+        log.debug(f"[Genius] [fetchartist_id] returned hardcoded ID for {name}")
         return 607653
 
     if where == 'GENIUS':
@@ -109,17 +140,17 @@ def fetch_artist_id(name,where):
         search_json = json.loads(r.text)
         if search_json["meta"]["status"] != 200:
             error_code = search_json["meta"]["status"]
-            logging.critical(f"[Genius] [fetchartist_id] Unable to fetch artist id for {name} ({error_code})")
+            log.critical(f"[Genius] [fetchartist_id] Unable to fetch artist id for {name} ({error_code})")
             exit()
         hits = search_json["response"]["hits"]
         for i in range(len(hits)):
             primary_artist_name = hits[i]["result"]["primary_artist"]["name"].lower().rstrip()
             primary_artist_id = hits[i]["result"]["primary_artist"]["id"]
             if primary_artist_name == name.lower().rstrip():
-                logging.debug(f"[Genius] [fetchartist_id] {name} => {primary_artist_id}")
+                log.debug(f"[Genius] [fetchartist_id] {name} => {primary_artist_id}")
                 return primary_artist_id
             else:
-                logging.debug(f"[Genius] [fetchartist_id] {primary_artist_name} does not match exactly with {name}. I'll continue and hope to find a perfect match!.")
+                log.debug(f"[Genius] [fetchartist_id] {primary_artist_name} does not match exactly with {name}. I'll continue and hope to find a perfect match!.")
     else:
 
         my_cursor = mydb.cursor()
@@ -127,10 +158,10 @@ def fetch_artist_id(name,where):
 
         for res in my_cursor:
             # TODO: Useless for loop, remove!
-            logging.debug(f"[Genius] [fetchartist_id] {name} => {res[0]} CACHE")
+            log.debug(f"[Genius] [fetchartist_id] {name} => {res[0]} CACHE")
             return res[0]
         else:
-            logging.debug(f"[Genius] [fetchartist_id] {name} NOT FOUND IN CACHE")
+            log.debug(f"[Genius] [fetchartist_id] {name} NOT FOUND IN CACHE")
             return None
 
 
@@ -139,12 +170,12 @@ def fetch_songs(artist_id,artist,page_number):
     # Iterates through every artist and starts downloading songs
 
     if artist_id is None:
-        logging.error(f"[Genius] [fetchSongs] Skipped {artist} because artist_id is None")
+        log.error(f"[Genius] [fetchSongs] Skipped {artist} because artist_id is None")
         return
     
     r = requests.get(f"https://api.genius.com/artists/{str(artist_id)}/songs/?page=" + str(page_number), headers={"Accept":"application/json","Content-Type":"application/json","Authorization":"Bearer " + genius_api_key})
     if r.status_code != 200:
-        logging.critical(f"[Genius] [fetchSongs] Unable to get songs by {artist} ({r.status_code})")
+        log.critical(f"[Genius] [fetchSongs] Unable to get songs by {artist} ({r.status_code})")
         exit()
 
     songs_json = json.loads(r.text)
@@ -158,7 +189,7 @@ def fetch_songs(artist_id,artist,page_number):
         # DEBUG
         song_title_tmp = songs[i]["title"]
         song_id_tmp = songs[i]["id"]
-        logging.info(f"[Genius] [fetchSongs] Found {song_title_tmp} on page {str(page_number)}")
+        log.info(f"[Genius] [fetchSongs] Found {song_title_tmp} on page {str(page_number)}")
 
         insert_cursor = mydb.cursor(buffered=True)
 
@@ -170,7 +201,9 @@ def fetch_songs(artist_id,artist,page_number):
         except Exception as e:
             exception_code = e.args[0]
             if not exception_code == 1062:
-                logging.warning(f"[Genius] [fetchSongs] Skipped {song_title_tmp} because is already present")
+                raise
+            else:
+                log.warning(f"[Genius] [fetchSongs] Skipped {song_title_tmp} because is already present")
                 continue
             
 
@@ -188,7 +221,7 @@ def start_fetching_songs(artists_list):
         artist_id = fetch_artist_id(artist,"LOCAL")
         if artist_id == -1:
             continue
-        logging.debug(f"[CODE] [startFetchingSongs] Fetching songs by {artist} ({artist_id})")
+        log.debug(f"[CODE] [startFetchingSongs] Fetching songs by {artist} ({artist_id})")
         fetch_songs(artist_id,artist,1)
 
     return
@@ -208,11 +241,11 @@ def get_lyrics_for_stored_songs():
         song_id_tmp = song[0]
         song_title_tmp = song[2]
 
-        logging.info(f"[Genius] [getLyricsForStoredSongs] Searching for cities in {song_title_tmp}")
+        log.info(f"[Genius] [getLyricsForStoredSongs] Searching for cities in {song_title_tmp}")
         r = requests.get(f"https://api.genius.com/songs/{song_id_tmp}", headers={"Accept":"application/json","Content-Type":"application/json","Authorization":"Bearer " + genius_api_key})
 
         if r.status_code != 200:
-            logging.critical(f"[Genius] [getLyricsForStoredSongs] Unable to fetch lyrics for {song_title_tmp} ({song_id_tmp}) ({r.status_code})")
+            log.critical(f"[Genius] [getLyricsForStoredSongs] Unable to fetch lyrics for {song_title_tmp} ({song_id_tmp}) ({r.status_code})")
             exit()
 
         lyrics_json = json.loads(r.text)
@@ -242,7 +275,7 @@ def get_lyrics_for_stored_songs():
                 full_word = lyrics[index:index_end].lower().rstrip() # The word that looks like a city
                 if first_char.isupper() and full_word == city_tmp.lower():
                     lyrics_line_tmp = get_city_line(lyrics,"\n",full_word)
-                    logging.info(f"[CODE] [getLyricsForStoredSongs] Found {full_word} in {song_title_tmp}!")
+                    log.info(f"[CODE] [getLyricsForStoredSongs] Found {full_word} in {song_title_tmp}!")
                     sql = "INSERT INTO songslocations (song_id, song_artist_id, song_city, song_latitude, song_longitude, song_lyricsUrl, song_lyricsLine, song_added, song_title) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                     val = (song_id_tmp,artist_id_tmp,full_word,-1,-1,lyrics_url,lyrics_line_tmp,todays_date,song_title_tmp)
 
@@ -251,17 +284,27 @@ def get_lyrics_for_stored_songs():
                     except Exception as e:
                         exception_code = e.args[0]
                         if not exception_code == 1062:
-                            logging.warning(f"[Genius] [fetchSongs] Skipped {song_title_tmp} because is already present")
+                            raise
+                        else:
+                            log.warning(f"[Genius] [getLyricsForStoredSongs] Skipped {song_title_tmp} because is already present")
                             continue
 
+                    already_done_cursor = mydb.cursor(buffered=True)
+                    try:
+                        sql2 = "INSERT INTO alreadydone (song_id) VALUES (%s)"
+                        val2 = song_id_tmp
+                        already_done_cursor.execute(sql2,val2)
+                    except Exception as e:
+                        exception_code = e.args[0]
+                        if not exception_code == 1062:
+                            raise
+                        else:
+                          log.error(f"[Genius] [getLyricsForStoredSongs] I've already done this song, why am I here? This is a bug!")
+
+                    mydb.commit()
 
             except ValueError:
                 index = -1
-
-    already_done_cursor = mydb.cursor(buffered=True)
-    already_done_cursor.execute("INSERT INTO alreadydone (song_id) SELECT song_id FROM songslocations WHERE song_id NOT IN (SELECT song_id FROM alreadydone)")
-
-    mydb.commit()
     
     return
 
@@ -287,15 +330,15 @@ def update_coordinates():
             cached_latitude = cached_city['song_latitude']
             cached_longitude = cached_city['song_longitude']
             update_cursor.execute(f"UPDATE songslocations SET song_latitude = {cached_latitude},song_longitude = {cached_longitude} WHERE song_city = '{song_city}'")
-            logging.info(f"[CODE] [updateCoordinates] Found ({cached_latitude},{cached_longitude}) for {song_lyricsUrl} CACHE")
+            log.info(f"[CODE] [updateCoordinates] Found ({cached_latitude},{cached_longitude}) for {song_lyricsUrl} CACHE")
         else:
             location = geolocator.geocode(song_city)
             if location is None:
-                logging.error(f"[Nominatim] [updateCoordinates] Can't find coordinates for {song_lyricsUrl}")
+                log.error(f"[Nominatim] [updateCoordinates] Can't find coordinates for {song_lyricsUrl}")
                 continue
             else:
                 update_cursor.execute(f"UPDATE songslocations SET song_latitude = {location.latitude},song_longitude = {location.longitude} WHERE song_city = '{song_city}'")
-                logging.info(f"[Nominatim] [updateCoordinates] Found ({location.latitude},{location.longitude}) for {song_lyricsUrl} and updated every instance found!")
+                log.info(f"[Nominatim] [updateCoordinates] Found ({location.latitude},{location.longitude}) for {song_lyricsUrl} and updated every instance found!")
 
     mydb.commit()
         
@@ -345,7 +388,7 @@ def load_artists_list():
     list = []
 
     for res in my_cursor:
-        list.append(res[1])
+        list.append(res[1].lower())
  
     return list
 
@@ -369,18 +412,18 @@ def main():
 
     if len(sys.argv) == 1 and bypass_arg == '':
 
-        logging.info("--------------------- RUNNING IN NORMAL MODE ---------------")
+        log.info("--------------------- RUNNING IN NORMAL MODE ---------------")
         clear_temporary_tables()
         artists_list = search_for_new_artists()
         start_fetching_songs(artists_list)
         get_lyrics_for_stored_songs()
         update_coordinates()
-        logging.info("--------------------- DONE ---------------")
+        log.info("--------------------- DONE ---------------")
 
     else:
 
         if bypass_arg != '':
-            logging.warning("YOU ARE BYPASSING sys.argv (bypassArg is set config.json)! Set bypassArg = '' to use sys.argv.")
+            log.warning("YOU ARE BYPASSING sys.argv (bypassArg is set config.json)! Set bypassArg = '' to use sys.argv.")
             arg = bypass_arg
         else:
             arg = sys.argv[1]
@@ -388,20 +431,18 @@ def main():
         if arg == '-w':
             # Running in "wait for approval mode", I'll just fill the final table but leave the locations to -1. You can manually check the cities, remove wrong results and run again the script with -a to finalize.
 
-            logging.info("--------------------- RUNNING IN WAIT FOR APPROVAL MODE ---------------")
+            log.info("--------------------- RUNNING IN WAIT FOR APPROVAL MODE ---------------")
             clear_temporary_tables()
             artists_list = search_for_new_artists()
             start_fetching_songs(artists_list)
             get_lyrics_for_stored_songs()
-            logging.info("--------------------- DONE ---------------")
+            log.info("--------------------- DONE ---------------")
 
         elif arg == '-a':
 
-            logging.info("--------------------- RUNNING IN APPROVAL MODE ---------------")
+            log.info("--------------------- RUNNING IN APPROVAL MODE ---------------")
             update_coordinates()
-            logging.info("--------------------- DONE ---------------")
-        elif arg == '-xd':
-            insertTitlesForgotten()
+            log.info("--------------------- DONE ---------------")
 
 
 
@@ -421,20 +462,23 @@ if __name__ == "__main__":
             dbase = datastore['dbase']
             bypass_arg = datastore['bypassArg']
             log_level = datastore['logLevel']
+            if datastore['noFeaturing'] is not None:
+                no_featuring = datastore['noFeaturing']
     except IOError:
             print("config.json not found, create your own by following the README on https://github.com/PaaaulZ/IndieMap")
             exit()
 
     fh = logging.FileHandler('indiemap.log')
+    log = logging.getLogger('IndieMap')
+    logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s')
     if log_level == '' or log_level == 0:
-        logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s', level=logging.ERROR)
+        log.setLevel(logging.ERROR)
     elif log_level == 1:
-        logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s', level=logging.WARNING)
+        log.setLevel(logging.WARNING)
     else:
-        logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s', level=logging.DEBUG)
-    log = logging.getLogger()
-    log.addHandler(fh)
+        log.setLevel(logging.DEBUG)
 
+    log.addHandler(fh)
 
     mydb = mysql.connector.connect(host=dbhost,user=dbuser,passwd=dbpass,database=dbase)
     main()
