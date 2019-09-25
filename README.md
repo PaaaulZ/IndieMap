@@ -14,7 +14,7 @@ I think the Python code looks better than before but the PHP side it's a bit of 
 
 ## A BIT OF BACKGROUND
 
-For those who don't know there is a meme in the Italian community about Indie artists using cities in every song, even the smallest unknown city (see Peschiera del Garda). I started this project to see if it's just a meme or the situation is really like that, you can judge by yourself watching the map.
+For those who don't know there is a meme in the Italian community about Indie artists using cities in every song, even the smallest unknown city (see Peschiera del Garda). I started this project to see if it's just a meme or the situation is really like that and (why not?) get better at Python. So is the meme true? Judge by yourself watching the [MAP](http://paaaulz.altervista.org).
 
 ## CONTENT
 
@@ -86,7 +86,8 @@ You can use the **bypassArg** config to force some arguments if you don't want t
 -w: Runs the script without searching for latitude and longitude so you can go into the database and delete errors, ambiguous names or things you don't want on your map.
 -a: Updates latitude and longitude for songs without coordinates (usually launched after a -w run).
 
-You can use the **logLevel** config to choose what you want to see in the logs. 0 is only errors, 1 shows even warnings, everything else shows also debug informations.
+You can use the **logLevel** config (0 => ERROR, 1 => WARNING , 2+ => DEBUG) to choose what you want to see in the logs. 0 is only errors, 1 shows even warnings, everything else shows also debug informations.
+You can use the **noFeaturing** config (true/false) to only get the primary artist from songs.
 
 ---
 
@@ -139,11 +140,6 @@ if (mysqli_connect_errno())
 4) Launch **IndieMap_py.py** and wait for it to finish.
 5) Copy the contents of **_website** folder and paste into your webserver folder.
 6) Visit **http://[your_server]/map.php**
-
-## TODO
-
-- Make a better **getCityLine** function. This sucks, gets "random" lines and it's a Frankenstein of copy/paste from Stackoverflow. For now it just works.
-- Make the webpage better for mobile users.
 
 ## SIDE NOTES
 

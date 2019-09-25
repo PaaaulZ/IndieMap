@@ -95,7 +95,6 @@ adana
 adapazari
 addis abeba
 addo elephant park
-adelaide
 adelaide regional of
 adelboden
 adele island
@@ -112,7 +111,6 @@ adrano
 adrar
 adrara san martino
 adrara san rocco
-adria
 adrian jara
 adro
 aedey
@@ -135,7 +133,6 @@ agalega
 agard
 agartala
 agassiz cs
-agata
 agaun
 agazzano
 agdam
@@ -445,7 +442,6 @@ alpnach
 alseno
 alserio
 alstonwille tropical
-alta
 alta floresta
 alta lufthavn
 altai
@@ -467,9 +463,7 @@ altiagach
 altidona
 altilia
 altino
-altissimo
 altivole
-alto
 alto palena
 alto parnaiba
 alto tapajos
@@ -763,7 +757,6 @@ arltunga
 arluno
 armavir
 armenia
-armeno
 armento
 armidale
 armidale aws
@@ -874,8 +867,6 @@ assen
 assens
 assiniboia
 assisi
-asso
-assolo
 assoro
 asswan
 astana
@@ -1310,7 +1301,6 @@ barnaul
 barni
 barnova
 barnwell agdm
-barolo
 barone canavese
 baronissi
 barons agcm
@@ -1758,7 +1748,6 @@ biser
 bisha
 bishkek
 bisho
-bishop
 bisignano
 biskra
 bismarck
@@ -1924,7 +1913,6 @@ bondoukou
 bonea
 bonefro
 bonemerse
-bonifacio
 bonifati
 bonilla island
 bonito
@@ -2069,7 +2057,6 @@ bourke aws
 bousso
 boutilimit
 bouvet island
-bova
 bova marina
 bovalino
 bovegno
@@ -2393,7 +2380,6 @@ bussi sul tirino
 busso
 bussolengo
 bussoleno
-bust
 busto arsizio
 busto garolfo
 buta
@@ -2512,7 +2498,6 @@ calciano
 calcinaia
 calcinate
 calcinato
-calcio
 caldaro sulla strada del vino
 caldarola
 caldera des. de. ata
@@ -2607,7 +2592,6 @@ camiri
 camisano
 camisano vicentino
 cammarata
-camo
 camogli
 camooweal township
 camp springs
@@ -2696,7 +2680,6 @@ camrose
 camugnano
 canakkale
 canal san bovo
-canale
 canale d'agordo
 canale monterano
 canar
@@ -2726,7 +2709,6 @@ caneva
 canevino
 canicatt����
 canicattini bagni
-canino
 canischio
 canistro
 canivete
@@ -2914,10 +2896,8 @@ carate brianza
 carate urio
 caratinga
 carauari
-caravaggio
 caravate
 caravelas
-caravelle
 caravino
 caravonica
 carberry cs
@@ -2964,7 +2944,6 @@ carignano
 carimate
 carinaro
 carinhanha
-carini
 carinola
 carisio
 carisolo
@@ -3130,20 +3109,17 @@ cascina
 cascinette d'ivrea
 casei gerola
 caselette
-casella
 caselle in pittari
 caselle landi
 caselle lurani
 caselle torinese
 caserta
-casey
 casey skiway
 casey skiway south
 casier
 casignana
 casiguran
 casina
-casino
 casino aws
 casirate d'adda
 caslav
@@ -3566,7 +3542,6 @@ cenadi
 cenate sopra
 cenate sotto
 cencenighe agordino
-cene
 ceneselli
 cengio
 cengiztopel
@@ -3907,7 +3882,6 @@ chiusano d'asti
 chiusano di san domenico
 chiusavecchia
 chiusdino
-chiusi
 chiusi della verna
 chivasso
 chivenor
@@ -4221,7 +4195,6 @@ colon
 colonel hill
 colonia
 colonia juan carrasc
-colonna
 colonnella
 colonno
 colorado springs
@@ -4470,7 +4443,6 @@ cottbus
 cottesmore
 courmayeur
 cove island
-covo
 cowra aws
 cowra comparison
 coxim
@@ -4742,7 +4714,6 @@ davagna
 davaly
 davao
 daverio
-davis
 davoli
 davos
 dawei
@@ -4852,7 +4823,6 @@ dharmpur
 dharmsala
 dholpur
 dhubri
-diamante
 diamantina
 diamantino
 diamond harbour
@@ -4964,7 +4934,6 @@ dongsheng
 dongtai
 donnas
 donnybrook
-dono
 donori
 doongan
 dorgali
@@ -5594,7 +5563,6 @@ fiordimonte
 fiorenzuola d'arda
 firenze
 firenzuola
-firmo
 fisciano
 fisher branch
 fiskabygd
@@ -5662,7 +5630,6 @@ follonica
 fombio
 fondachelli-fantina
 fondi
-fondo
 fonni
 fontainemore
 fontana liri
@@ -5802,7 +5769,6 @@ fragneto l'abate
 fragneto monforte
 fraine
 framura
-franca
 francavilla al mare
 francavilla angitola
 francavilla bisio
@@ -6249,7 +6215,6 @@ gioia sannitica
 gioia tauro
 gioiosa ionica
 gioiosa marea
-giove
 giovinazzo
 giovo
 girardot
@@ -6836,7 +6801,6 @@ hart island
 hartberg
 hartford
 hartz mountains
-harvey
 harzgerode
 hasavjurt
 haskell
@@ -6991,7 +6955,6 @@ holzdorf
 homalin
 hombori
 homebush
-homer
 homs
 honavar
 hone
@@ -7491,7 +7454,6 @@ jerez de la frontera
 jericho
 jermuk
 jerrys plains
-jersey
 jerusalem
 jerusalem centre
 jervois
@@ -7853,7 +7815,6 @@ keetmanshoop
 kefalhnia
 keflavikurflugvollur
 kegnaes
-keith
 kekaha
 kekesteto
 kelibia
@@ -8058,7 +8019,6 @@ knysna
 ko lanta
 ko samui
 ko sichang
-kobe
 kobeliaky
 koblenz falckenstein
 kobuleti
@@ -8688,7 +8648,6 @@ lentekhi
 lentella
 lentiai
 lentini
-leon
 leonessa
 leonforte
 leonora
@@ -9243,7 +9202,6 @@ magliano sabina
 magliano vetere
 maglie
 magliolo
-maglione
 magnacavallo
 magnago
 magnano
@@ -9371,7 +9329,6 @@ malvito
 malwy
 malye derbety
 malye karmakuly
-mama
 mamakan
 mambasa
 mamfe
@@ -9540,7 +9497,6 @@ mariupol
 mariyna gorka
 marjaniem
 marken
-market
 marknesse aws
 markovo
 markoye
@@ -9577,7 +9533,6 @@ marsicovetere
 marsiglia
 martano
 martellago
-martello
 marticot island
 martignacco
 martignana di po
@@ -9658,7 +9613,6 @@ massello
 masserano
 massignano
 massimeno
-massimino
 massino visconti
 massiola
 masterton armourguar
@@ -9863,7 +9817,6 @@ mercatino conca
 mercato san severino
 mercato saraceno
 merced
-mercedes
 mercenasco
 mercogliano
 mercury
@@ -9897,7 +9850,6 @@ messina
 messina macuville
 messstetten
 mestrino
-meta
 metabaru ab
 metehara
 methoni
@@ -9967,7 +9919,6 @@ milano
 milazzo
 mildred lake
 mildura
-milena
 miles city
 miles constance stre
 milesovka
@@ -10060,7 +10011,6 @@ mistook
 mistretta
 misurata
 mitchell
-mito
 mittarfik nuuk
 mittarfik qaanaaq
 mittarfik upernavik
@@ -10078,7 +10028,6 @@ mo i rana
 moanda
 moasca
 mobaye
-mobile
 mocambinho
 mocamedes
 mochovce
@@ -10265,7 +10214,6 @@ montalto dora
 montalto ligure
 montalto pavese
 montalto uffugo
-montana
 montanaro
 montanaso lombardo
 montanera
@@ -10482,9 +10430,7 @@ monteverde
 monteverdi marittimo
 monteviale
 montevideo
-montezemolo
 montgen�vre
-montgomery
 montiano
 monticelli brusati
 monticelli d'ongina
@@ -10741,7 +10687,6 @@ munoz
 munsan
 munsyari
 muonio
-mura
 murasi
 murau
 muravera
@@ -10895,7 +10840,6 @@ nanchang
 nancheng
 nanchong
 nancowry
-nancy
 nancy essey
 nancy ochey
 nandaime
@@ -10959,7 +10903,6 @@ nashville
 nasik city
 nasino
 nasiriya
-naso
 nassau
 nassau new providen
 natal
@@ -10973,7 +10916,6 @@ nausori
 nautabu
 nautanwa
 navacerrada
-nave
 nave san rocco
 navelli
 naven
@@ -11189,7 +11131,6 @@ nola
 nole
 nolinsk
 nomaglio
-nome
 nomi
 nomuka
 nonantola
@@ -11273,7 +11214,6 @@ novara
 novara di sicilia
 novate mezzola
 novate milanese
-nove
 novedrate
 novellara
 novello
@@ -11559,7 +11499,6 @@ orai
 oran port
 oran senia
 oran tafaraoui
-orange
 orange agricultural
 orange aws
 orange comparison
@@ -11863,7 +11802,6 @@ palermiti
 palermo
 palestine
 palestrina
-palestro
 palgrunden
 paliano
 palic
@@ -11957,7 +11895,6 @@ parcines
 pardubice
 parella
 parent
-parenti
 parete
 pareto
 parg
@@ -11966,7 +11903,6 @@ pari cachoeira
 parigi
 parikkala koitsanlah
 parintins
-paris
 park falls
 parkalompolo
 parkes
@@ -12070,7 +12006,6 @@ pebane
 pebble island
 pec pod snezkou
 peccioli
-pecco
 pecetto di valenza
 pecetto torinese
 pechino
@@ -12134,7 +12069,6 @@ pensacola
 penteleu
 penticton a
 pentone
-penza
 peoria
 peoria agdm
 pequot lake
@@ -12446,7 +12380,6 @@ piombino
 piombino dese
 pioraco
 piossasco
-piotta
 piov���� massaia
 piove di sacco
 piovene rocchette
@@ -12464,7 +12397,6 @@ piripiri
 pirlangimpi
 pirovskoe
 pisa
-pisano
 piscina
 piscinas
 pisciotta
@@ -12695,7 +12627,6 @@ pontestura
 pontevedra
 pontevico
 pontey
-ponti
 ponti sul mincio
 pontianak
 pontida
@@ -13001,7 +12932,6 @@ prince george ua
 prince rupert awos
 princeton cs
 princeville
-principe
 prins christian sund
 priocca
 priola
@@ -13157,7 +13087,6 @@ qitai
 qu xian
 quad city
 quadrelle
-quadri
 quagliuzzo
 qualiano
 quandialla post offi
@@ -13284,12 +13213,10 @@ ranua kk
 ranzanico
 ranzo
 raoul island
-rapa
 rapagnano
 rapallo
 rapid city
 rapid city wfo
-rapino
 rapolano terme
 rapolla
 rapone
@@ -13376,7 +13303,6 @@ reichenau
 reims courcy
 reino
 reisach
-reitano
 rekdal
 remada
 remanso
@@ -13385,7 +13311,6 @@ remedello
 remontnoe
 rena haugedalen
 renate
-rende
 rengat
 renk
 rennes
@@ -13579,7 +13504,6 @@ robassomero
 robben island
 robbiate
 robbio
-robe
 robe airfield
 robecchetto con induno
 robecco d'oglio
@@ -13815,7 +13739,6 @@ rosolina
 rosolini
 rosora
 ross
-rossa
 rossana
 rossano
 rossano veneto
@@ -14026,7 +13949,6 @@ sakata
 sakon nakhon
 sakon nakhon agromet
 sakunja
-sala
 sala baganza
 sala biellese
 sala bolognese
@@ -14087,7 +14009,6 @@ salon de provence
 salorno
 salsomaggiore
 salsomaggiore terme
-salt
 salt lake city
 saltara
 saltdal
@@ -15019,7 +14940,6 @@ segen kyuel
 segeza
 seggiano
 segl maria
-segni
 segonzano
 segou
 segovia
@@ -15558,7 +15478,6 @@ soleminis
 solendet
 solent
 solenzara
-solero
 solesino
 soleto
 solferino
@@ -15631,7 +15550,6 @@ sorochinsk
 soroti
 sorradile
 sorrento
-sorso
 sort
 sortavala
 sortino
@@ -16424,7 +16342,6 @@ terschelling hoorn a
 tertenia
 teruel
 terzigno
-terzo
 terzo d'aquileia
 terzolas
 terzorio
@@ -16679,7 +16596,6 @@ tornata
 tornimparte
 tornio liakka
 tornolo
-toro
 toronto
 toronto buttonville
 toronto island a
@@ -16860,7 +16776,6 @@ tresigallo
 tresivio
 tresnuraghes
 trevenzuolo
-trevi
 trevi nel lazio
 trevico
 treviglio
@@ -16915,7 +16830,6 @@ trivigno
 trivolzio
 trodena nel parco naturale
 trofarello
-troia
 troickij priisk
 troicko pecherskoe
 troickoe
@@ -17164,7 +17078,6 @@ uranium city
 uras
 urbana
 urbania
-urbe
 urbino
 urbisaglia
 urdzhar
@@ -17645,7 +17558,6 @@ vicolungo
 vicopisano
 vicosa
 vicovaro
-victoria
 victoria beach
 victoria falls
 victoria gonzales cs
@@ -17856,7 +17768,6 @@ vinnicy
 vinnytsia
 vinovo
 vinzaglio
-viola
 violet grove cs
 vione
 vioolsdrif
@@ -18341,7 +18252,6 @@ yongan
 yongshujiao
 yorkton
 yoro
-young
 youngstown
 youyang
 yozgat
@@ -18402,7 +18312,6 @@ zanzibar
 zaoyang
 zaporizhzhia
 zapponeta
-zara
 zaragoza
 zaranj
 zardab
@@ -18786,7 +18695,6 @@ tennessee
 texas
 utah
 vermont
-virginia
 virginia occidentale
 washington
 wisconsin

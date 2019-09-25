@@ -274,7 +274,7 @@ def get_lyrics_for_stored_songs():
                 first_char = lyrics[index][0] # The first character of the word that looks like a city
                 full_word = lyrics[index:index_end].lower().rstrip() # The word that looks like a city
                 if first_char.isupper() and full_word == city_tmp.lower():
-                    lyrics_line_tmp = get_city_line(lyrics,"\n",full_word)
+                    lyrics_line_tmp = get_city_line(lyrics,full_word)
                     log.info(f"[CODE] [getLyricsForStoredSongs] Found {full_word} in {song_title_tmp}!")
                     sql = "INSERT INTO songslocations (song_id, song_artist_id, song_city, song_latitude, song_longitude, song_lyricsUrl, song_lyricsLine, song_added, song_title) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                     val = (song_id_tmp,artist_id_tmp,full_word,-1,-1,lyrics_url,lyrics_line_tmp,todays_date,song_title_tmp)
@@ -291,9 +291,8 @@ def get_lyrics_for_stored_songs():
 
                     already_done_cursor = mydb.cursor(buffered=True)
                     try:
-                        sql2 = "INSERT INTO alreadydone (song_id) VALUES (%s)"
-                        val2 = song_id_tmp
-                        already_done_cursor.execute(sql2,val2)
+                        sql2 = f"INSERT INTO `alreadydone` VALUES ({song_id_tmp})"
+                        already_done_cursor.execute(sql2)
                     except Exception as e:
                         exception_code = e.args[0]
                         if not exception_code == 1062:
@@ -346,39 +345,26 @@ def update_coordinates():
  
     return
 
-def get_city_line(string, first, last):
-    # TODO: Fix this function
 
-    lf_found = []
+def get_city_line(lyrics, word, song_id):
+    
+    lyrics = lyrics.replace('\n','<br/>')
+    # Make sure that lyrics start and end with <br/> to help the regex, I like my regex to be readable at first sight.
+    lyrics = "<br/>" + lyrics + "<br/>"
+    regex = r"(?:<br/>)(.*?{0}.*?)(?:<br/>)".format(word)
+    matches = re.findall(regex,lyrics,flags = re.IGNORECASE|re.MULTILINE)
 
-    try:
+    city_line = ""
 
-        string = string.lower().rstrip()
-        last = last.lower().rstrip()
+    if len(matches) > 0:
+        # We don't need the <br/> anymore
+        city_line = matches[0].replace('<br/>',' ')
+    else:
+        # I prefer showing "not found" so I can see errors and fix.
+        city_line = "[NOT FOUND]"
 
-        row_before = 0
-        row_after = len(string)
 
-        # Search for \n closest to the city name
-
-        for i in range(string.index(last)):
-            tmp_1 = string[i]
-            tmp_2 = string[i+1]
-            if string[i] == '\n':
-                # ok is a line feed, add it to the list
-                if i <= string.index(last):
-                    row_before = i
-                else:
-                    row_after = i
-                lf_found.append(i)
-
-        start = row_before
-        end = row_after
-
-        out_string = re.sub('[^a-zA-Z0-9 \n\.\'èéòòìàù]', '', string[start:end])
-    except ValueError:
-        out_string = ""
-    return out_string.capitalize()
+    return city_line
 
 def load_artists_list():
 
