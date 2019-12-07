@@ -129,6 +129,9 @@ def fetch_artist_id(name,where):
     elif name == "coma_cose":
         log.debug(f"[Genius] [fetchartist_id] switched {name} with hardcoded name")
         name = 'coma cose'
+    elif name == "legno":
+        log.debug(f"[Genius] [fetchartist_id] switched {name} with hardcoded name")
+        name = 'legno (gruppo)'
     elif name == 'franco126':
         log.debug(f"[Genius] [fetchartist_id] returned hardcoded ID for {name}")
         return 607653
@@ -274,7 +277,7 @@ def get_lyrics_for_stored_songs():
                 first_char = lyrics[index][0] # The first character of the word that looks like a city
                 full_word = lyrics[index:index_end].lower().rstrip() # The word that looks like a city
                 if first_char.isupper() and full_word == city_tmp.lower():
-                    lyrics_line_tmp = get_city_line(lyrics,full_word)
+                    lyrics_line_tmp = get_city_line(lyrics,full_word,song_id_tmp)
                     log.info(f"[CODE] [getLyricsForStoredSongs] Found {full_word} in {song_title_tmp}!")
                     sql = "INSERT INTO songslocations (song_id, song_artist_id, song_city, song_latitude, song_longitude, song_lyricsUrl, song_lyricsLine, song_added, song_title) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                     val = (song_id_tmp,artist_id_tmp,full_word,-1,-1,lyrics_url,lyrics_line_tmp,todays_date,song_title_tmp)

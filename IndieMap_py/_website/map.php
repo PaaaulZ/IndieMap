@@ -74,6 +74,7 @@
 
 	function details(songId,cityName)
 	{
+		cityName = cityName.replace(/_/g," ");
 		$.ajax({
 				url: "getDetails.php?idSearch=" + songId + "&citySearch=" + cityName,
 				contentType: "application/x-www-form-urlencoded;charset=utf-8",
@@ -125,7 +126,7 @@
 		for ($i = 0; $i < count($songsPerCities); $i++)
 		{
 			// For every city
-			$cityProperCase = array_keys($songsPerCities)[$i];
+			$cityProperCase = str_replace(" ","_",array_keys($songsPerCities)[$i]);
 			$textTMP = "<p style = \"text-align:center\"><b>{$cityProperCase}</b></p><br/>";
 			for ($j = 0; $j < count($songsPerCities[array_keys($songsPerCities)[$i]]); $j++)
 			{
