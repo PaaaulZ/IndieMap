@@ -3,7 +3,7 @@
 <head>
 	<?php header('Content-Type: text/html; charset=utf-8'); ?>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<title>IndieMap by PaaaulZ | https://github.com/PaaaulZ/IndieMap</title>
 	<!-- Load leaflet maps library and stylesheet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
@@ -14,34 +14,41 @@
 		{
 			height: 100%;
 			margin: 0;
+			background-color: rgb(221,221,221);
 		}
-
 		#map 
 		{
-			<?php
-				// eww hardcoded sizes.
-			if (isMobile())
-			{
-				echo("width: 400px;height: 550px;");
-			}
-			else
-			{
-				echo("width: 1024px;height: 768px;");
-			}
-			?>
+			width: 600px;
+			height: 400px;
+			display: inline-block;
+		}
+		#details 
+		{
+			font-family: Calibri;
+			
+			float: right;
+			display: flex;
+			justify-content: center;
+			align-items: center;			
 		}
 	</style>
+		<!-- display: inline-block; details-->
+
+	<style>
+		body { padding: 0; margin: 0; } 
+		#wrapper { height: 100%; width: 100vw; display: flex; }
+		#map { height: 100%; width: 70vw; margin-right: 20px; }
+		#details { height: 100%; width: 30vw; flex-wrap: wrap; flex-direction: column; }
+		#line-break { width: 100%; }
+	</style>
+</head>
 </head>
 <body>
-<table rows = 1 cols = 2>
-	<tr>
-		<td>
-			<div id = 'map'><!-- here goes the map --></div>
-		<td>
-		<td>
-			<div id = 'details' style='font-family:Calibri'><!-- here goes the lyrics --></div>
-		</td>
-</table>
+	<div id = 'wrapper'>
+		<div id = 'map'><!-- here goes the map --></div>
+		<div id = 'details'><!-- here goes the lyrics --></div>		
+	</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
@@ -126,6 +133,7 @@
 		for ($i = 0; $i < count($songsPerCities); $i++)
 		{
 			// For every city
+			//$cityProperCase = array_keys($songsPerCities)[$i];
 			$cityProperCase = str_replace(" ","_",array_keys($songsPerCities)[$i]);
 			$textTMP = "<p style = \"text-align:center\"><b>{$cityProperCase}</b></p><br/>";
 			for ($j = 0; $j < count($songsPerCities[array_keys($songsPerCities)[$i]]); $j++)
