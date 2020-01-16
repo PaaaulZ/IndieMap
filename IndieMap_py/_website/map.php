@@ -3,6 +3,8 @@
 <head>
 	<?php header('Content-Type: text/html; charset=utf-8'); ?>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="og:title" property="og:title" content="IndieMap by PaaaulZ - A map with all cities from italian indie songs">
+	<meta name="description" content="IndieMap by PaaaulZ - A map with all cities from italian indie songs" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<title>IndieMap by PaaaulZ | https://github.com/PaaaulZ/IndieMap</title>
 	<!-- Load leaflet maps library and stylesheet -->
@@ -41,7 +43,6 @@
 		#details { height: 100%; width: 30vw; flex-wrap: wrap; flex-direction: column; }
 		#line-break { width: 100%; }
 	</style>
-</head>
 </head>
 <body>
 	<div id = 'wrapper'>
@@ -165,30 +166,25 @@
 			echo("L.marker([{$song['song_latitude']}, {$song['song_longitude']}], {icon: $pinColor}).bindPopup('$textTMP').addTo(map);\n");	
 		}
 
-
-		function isMobile() 
-		{
-			return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
-		}
-
 	?>
 
 </script>
 
-<?php
+<br/><br/><div id = 'footer' class = 'footer'>
+	<?php
 
-$queryDate = mysqli_query($dbc,"SELECT MAX(song_added) AS lastDate FROM songslocations ORDER BY song_added DESC LIMIT 1");
+	$queryDate = mysqli_query($dbc,"SELECT MAX(song_added) AS lastDate FROM songslocations ORDER BY song_added DESC LIMIT 1");
 
-if ($date = $queryDate->fetch_object()) 
-{
-	echo("<br/><br/>LAST UPDATE: " . date("d/m/Y", strtotime($date->lastDate))); 
-}
+	if ($date = $queryDate->fetch_object()) 
+	{
+		echo("LAST UPDATE: " . date("d/m/Y", strtotime($date->lastDate))); 
+	}
 
-mysqli_close($dbc);
-?>
+	mysqli_close($dbc);
+	?>
+	<br/>
 
-
+</div>
 </body>
-
 </html>
 
