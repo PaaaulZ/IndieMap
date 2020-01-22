@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>IndieMap by PaaaulZ | FAQ</title>
+</head>
+<body>
+<header class="cd-header flex flex-column flex-center">
+  <div class="text-component text-center">
+    <h1>IndieMap by PaaaulZ</h1>
+    <h2>Frequently Asked Questions</h2>
+  </div>
+</header>
+
+<section class="cd-faq js-cd-faq container max-width-md margin-top-lg margin-bottom-lg">
+	<ul class="cd-faq__categories">
+		<li><a class="cd-faq__category cd-faq__category-selected truncate" href="#basics">Basics</a></li>
+	</ul> <!-- cd-faq__categories -->
+
+	<div class="cd-faq__items">
+		<ul id="basics" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Basics</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>What is this?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+			<p>This is a map of all the cities named in lyrics of italian indie songs. For some weird reason italian indie artists love naming songs after cities or just throwing random cities in their lyrics so I
+				decided to write a simple script to put everything into a map.
+			</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Why?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>Why not? At the start it was all a meme, now it's "statistics".</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>How does it work?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>Just click a point on the map to see the name of the city and a list of songs. Once you click on a song the lyrics will pop on the right and you can read where in the lyrics the song is named by the artist.</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>How do you choose songs?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>My goal was to make the data gathering almost 100% automatic so I don't choose songs. Every time you run the scripts it gathers a list of artists, scans every song they have and if it finds a city name in the lyrics it will save the coordinates just to later place everything on the map.</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Where can I learn more?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>You can read more detailed informations and code on my GitHub project page by clicking here <a href = 'https://github.com/PaaaulZ/IndieMap'>IndieMap @ GitHub</a>. Please do not expect advanced stuff, this is just for fun and games.</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+	</div> <!-- cd-faq__items -->
+
+	<a href="#0" class="cd-faq__close-panel text-replace">Close</a>
+  
+
+  <div class="cd-faq__overlay" aria-hidden="true"></div>
+</section> <!-- cd-faq -->
+<script src="assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+<script src="assets/js/main.js"></script> 
+</body>
+</html>

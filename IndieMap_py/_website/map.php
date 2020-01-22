@@ -34,7 +34,6 @@
 			align-items: center;			
 		}
 	</style>
-		<!-- display: inline-block; details-->
 
 	<style>
 		body { padding: 0; margin: 0; } 
@@ -43,12 +42,66 @@
 		#details { height: 100%; width: 30vw; flex-wrap: wrap; flex-direction: column; }
 		#line-break { width: 100%; }
 	</style>
+
+	<style>
+	/* Style the header with a grey background and some padding */
+.header {
+  overflow: hidden;
+  background-color: rgb(200,200,200);
+  padding: 20px 10px;
+}
+
+/* Style the header links */
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: rgb(170,211,223);
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+</style>
+
+<!-- start header stuff -->
+
+<div class="header">
+  <div class="header-left">
+    <a href="javascript:window.open('http://paaaulz.altervista.org/faq/index.html','_blank');void(0);">FAQ</a>
+  </div>
+</div>
 </head>
 <body>
 	<div id = 'wrapper'>
 		<div id = 'map'><!-- here goes the map --></div>
 		<div id = 'details'><!-- here goes the lyrics --></div>		
 	</div>
+
+<!-- end header stuff -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -187,4 +240,5 @@
 </div>
 </body>
 </html>
+
 
