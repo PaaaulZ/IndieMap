@@ -116,6 +116,18 @@ if (mysqli_connect_errno())
 
 ---
 
+- Requests
+
+`pip3 install requests`
+
+---
+
+- MySQL Connector
+
+`pip3 install mysql-connector`
+
+---
+
 - BeautifulSoup
 
 `pip3 install BeautifulSoup4`
