@@ -6,7 +6,7 @@
 	<meta name="og:title" property="og:title" content="IndieMap by PaaaulZ - A map with all cities from italian indie songs">
 	<meta name="description" content="IndieMap by PaaaulZ - A map with all cities from italian indie songs" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>IndieMap by PaaaulZ | https://github.com/PaaaulZ/IndieMap</title>
+	<title>IndieMap by PaaaulZ | A map of Italian indie songs.</title>
 	<!-- Load leaflet maps library and stylesheet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
@@ -92,6 +92,13 @@
 <div class="header">
   <div class="header-left">
     <a href="javascript:window.open('http://paaaulz.altervista.org/faq/index.html','_blank');void(0);">FAQ</a>
+	<!-- Share buttons div -->
+	<div id = 'share' style = 'float:right'>
+		<!-- Facebook share button -->
+		<div class="fb-share-button" data-href="http://paaaulz.altervista.org/map.php" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpaaaulz.altervista.org%2Fmap.php&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Condividi</a></div>
+		<!-- Twitter share button -->
+		<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+	</div>
   </div>
 </div>
 </head>
@@ -226,7 +233,8 @@
 <br/><br/><div id = 'footer' class = 'footer'>
 	<?php
 
-	$queryDate = mysqli_query($dbc,"SELECT MAX(song_added) AS lastDate FROM songslocations ORDER BY song_added DESC LIMIT 1");
+	/*
+    $queryDate = mysqli_query($dbc,"SELECT MAX(song_added) AS lastDate FROM songslocations ORDER BY song_added DESC LIMIT 1");
 
 	if ($date = $queryDate->fetch_object()) 
 	{
@@ -234,11 +242,23 @@
 	}
 
 	mysqli_close($dbc);
+    */
 	?>
+    
 	<br/>
-
 </div>
+
+<!-- fb share button stuff -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v6.0"></script>
+
+<!-- twitter share button stuff -->
+<script type="text/javascript">// <![CDATA[
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];
+if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
+js.src="//platform.twitter.com/widgets.js";
+fjs.parentNode.insertBefore(js,fjs);
+}}(document,"script","twitter-wjs");
+// ]]></script>
 </body>
 </html>
-
-
