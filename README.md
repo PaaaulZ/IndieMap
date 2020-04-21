@@ -3,7 +3,7 @@ A Python script that finds cities in lyrics of songs by Italian Indie Artists an
 
 ---
 
-Want to see it working? Check my [LIVE VERSION](http://paaaulz.altervista.org)
+Want to see it working? Check my [LIVE VERSION](http://paaaulz.altervista.org/indiemap)
 
 ## DISCLAIMER
 
