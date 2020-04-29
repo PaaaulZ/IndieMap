@@ -83,11 +83,11 @@ It's used to get the **lyricsUrl** and **lyricsLine** and show it near the map w
 You can of course change the **spotifyPlaylistID** with a Spotify playlist id of your choice.
 You can use the **bypassArg** config to force some arguments if you don't want to use arguments from the command line. I personally use bypassArgs = '-w'. Arguments for this script are:
 
--w: Runs the script without searching for latitude and longitude so you can go into the database and delete errors, ambiguous names or things you don't want on your map.
--a: Updates latitude and longitude for songs without coordinates (usually launched after a -w run).
+* -w: Runs the script without searching for latitude and longitude so you can go into the database and delete errors, ambiguous names or things you don't want on your map.
+* -a: Updates latitude and longitude for songs without coordinates (usually launched after a -w run).
 
-You can use the **logLevel** config (0 => ERROR, 1 => WARNING , 2+ => DEBUG) to choose what you want to see in the logs. 0 is only errors, 1 shows even warnings, everything else shows also debug informations.
-You can use the **noFeaturing** config (true/false) to only get the primary artist from songs.
+You can use the **logLevel** config (0 => ERROR, 1 => WARNING , 2 => DEBUG) to choose what you want to see in the logs. 0 is only errors, 1 shows even warnings, everything else shows also debug informations.
+You can use the **noFeaturing** config (true/false) to only get the primary artist from every song instead of iterating every artist.
 
 ---
 
@@ -110,48 +110,25 @@ if (mysqli_connect_errno())
 
 ## REQUIREMENTS
 
-- Python 3.x
+Required libraries can be found in the requirements.txt file and installed by running: **pip3 install -r requirements.txt**
+You will also need:
 
-`https://www.python.org/downloads/`
-
----
-
-- Requests
-
-`pip3 install requests`
-
----
-
-- MySQL Connector
-
-`pip3 install mysql-connector`
-
----
-
-- BeautifulSoup
-
-`pip3 install BeautifulSoup4`
-
----
-
-- Geopy
-
-`pip3 install geopy`
-
----
-
-- MySQL Server
+* A MySQL Server with an IndieMap database, you can find the database structure in **indiemap.sql**.
+* A Spotify API key.
+* A Genius API key.
 
 ---
 
 ## USAGE
 
-1) Download or clone this repository.
-2) Create the tables in your database by using **indiemap.sql**.
-3) Create a **config.json** with the template above and put it near **IndieMap_py.py**
-4) Launch **IndieMap_py.py** and wait for it to finish.
-5) Copy the contents of **_website** folder and paste into your webserver folder.
-6) Visit **http://[your_server]/map.php**
+1) Clone this repository.
+2) Install requirements with **pip3 install -r requirements.txt**
+3) Create the tables in your database by using **indiemap.sql**.
+4) Create a **config.json** with the template above and put it near **IndieMap_py.py**
+5) Launch **IndieMap_py.py** and wait for it to finish.
+6) Copy the contents of **_website** folder and paste into your webserver folder.
+7) Edit **_website/config.php** with your credentials.
+8) Visit **http://[your_server]/map.php** and everything should be ready to go!
 
 ## SIDE NOTES
 

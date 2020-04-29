@@ -1,0 +1,4 @@
+requests
+mysql-connector
+BeautifulSoup4
+geopy

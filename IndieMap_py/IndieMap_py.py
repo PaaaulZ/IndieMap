@@ -3,7 +3,6 @@ import json
 import requests
 import re
 import os
-import csv
 from bs4 import BeautifulSoup
 from geopy.geocoders import Nominatim
 import mysql.connector
