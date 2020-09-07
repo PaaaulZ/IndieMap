@@ -26,35 +26,9 @@ no_featuring = False
 mydb = None
 log = ""
 
-# Those artists are on Spotify but not on Genius so it will find something wrong.
-artists_to_ignore = [
-    'chiazzetta',
-    'kaufman',
-    'management',
-    'rovere',
-    'nuvola',
-    'esposito',
-    'meli',
-    'the jab',
-    'J Ax',
-    'Francesca Michielin',
-    'Fedez',
-    'Achille lauro',
-    'MadMan',
-    'Fabri Fibra',
-    'Noyz Narcos',
-    'Gemitaiz',
-    'En?gma',
-    'Salmo',
-    'Clementino',
-    'alex britti',
-    'Gemello',
-    'Dark polo gang',
-    'moca'] 
-
 # --- END GLOBALS ---
 
-def search_for_new_artists():
+def search_for_new_artists(artists_to_ignore):
 
     # --- REQUIRES SPOTIFY API KEY ---
     # Searches on the specified Spotify playlist for new artists and returns the updated list
@@ -81,6 +55,7 @@ def search_for_new_artists():
 
             artist_name_tmp = artists_tmp[j]["name"].rstrip().lower()
 
+            # Those artists are on Spotify but not on Genius so it will find something wrong.
             if artist_name_tmp in artists_to_ignore:
                 # HACK: Those artists are not on genius, it will find something wrong (ore they are not indie). NOTE: Using lowercase so we don't have to mess around with case-sensitive
                 continue
@@ -177,8 +152,12 @@ def fetch_songs(artist_id,artist,page_number):
     
     r = requests.get(f"https://api.genius.com/artists/{str(artist_id)}/songs/?page=" + str(page_number), headers={"Accept":"application/json","Content-Type":"application/json","Authorization":"Bearer " + genius_api_key})
     if r.status_code != 200:
-        log.critical(f"[Genius] [fetchSongs] Unable to get songs by {artist} ({r.status_code})")
-        exit()
+        if r.status_code == 404:
+            log.critical(f"[Genius] [fetchSongs] {artist} not found on Genius ")
+            return
+        else:
+            log.critical(f"[Genius] [fetchSongs] Unable to get songs by {artist} ({r.status_code})")
+            exit()
 
     songs_json = json.loads(r.text)
     songs = songs_json["response"]["songs"]
@@ -396,13 +375,20 @@ def search_locations_cache(city_name):
     else:
         return None
 
+def load_artists_to_ignore():
+
+    if os.path.exists('ignore.json'):
+        f = open('ignore.json','r')
+        return json.load(f)['ignore']
+
 def main():
 
     if len(sys.argv) == 1 and bypass_arg == '':
 
         log.info("--------------------- RUNNING IN NORMAL MODE ---------------")
         clear_temporary_tables()
-        artists_list = search_for_new_artists()
+        artists_to_ignore = load_artists_to_ignore()
+        artists_list = search_for_new_artists(artists_to_ignore)
         start_fetching_songs(artists_list)
         get_lyrics_for_stored_songs()
         update_coordinates()
@@ -421,7 +407,8 @@ def main():
 
             log.info("--------------------- RUNNING IN WAIT FOR APPROVAL MODE ---------------")
             clear_temporary_tables()
-            artists_list = search_for_new_artists()
+            artists_to_ignore = load_artists_to_ignore()
+            artists_list = search_for_new_artists(artists_to_ignore)
             start_fetching_songs(artists_list)
             get_lyrics_for_stored_songs()
             log.info("--------------------- DONE ---------------")
@@ -438,6 +425,7 @@ def main():
  
 if __name__ == "__main__":
     # Load configuration file with various API keys
+
     try:
         with open('config.json', 'r') as f:
             datastore = json.load(f)
